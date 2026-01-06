@@ -1,6 +1,6 @@
 {
   "name": "@lerna/create",
-  "version": "999.9.9-e2e.0",
+  "version": "9.0.3",
   "type": "commonjs",
   "description": "Create a new lerna-managed package",
   "keywords": [
@@ -121,5 +121,5 @@
       "require": "./dist/lib/lerna-module-data.js"
     }
   },
-  "gitHead": "66afb61486bad8ac7dc3b38390870e5a40c5bb8f"
+  "gitHead": "18297cc14a6966003424d93688335f52d7711732"
 }
