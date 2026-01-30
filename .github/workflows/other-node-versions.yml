@@ -137,6 +137,10 @@ jobs:
           NX_CLOUD_ACCESS_TOKEN: ""
           NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
+      - name: Run Nx Cloud Self-Healing CI
+        if: ${{ always() }}
+        run: npx nx-cloud fix-ci
+
       - name: Stop all running agents
         # It's important that we always run this step, otherwise in the case of any failures in preceding non-Nx steps, the agents will keep running and waste billable minutes
         if: ${{ always() }}
