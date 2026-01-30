@@ -51,6 +51,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: nrwl/nx-set-shas@826660b82addbef3abff5fa871492ebad618c9e1 # v4
+
+      - name: Start Nx Cloud CI Run - Linux - node-${{ matrix.node }}
+        run: npx nx-cloud start-ci-run --stop-agents-after="e2e"
+
       - name: Install node v${{ matrix.node }} and dependencies
         uses: ./.github/actions/install-node-and-dependencies
         with:
@@ -132,6 +137,10 @@ jobs:
           NX_CLOUD_ACCESS_TOKEN: ""
           NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
+      - name: Run Nx Cloud Self-Healing CI
+        if: ${{ always() }}
+        run: npx nx-cloud fix-ci
+
       - name: Stop all running agents
         # It's important that we always run this step, otherwise in the case of any failures in preceding non-Nx steps, the agents will keep running and waste billable minutes
         if: ${{ always() }}
@@ -212,6 +221,10 @@ jobs:
         run: npx nx-cloud start-agent
         env:
           NX_AGENT_NAME: node-${{ matrix.node }}-agent-${{ matrix.agent }}
+
+      - name: Run Nx Cloud Self-Healing CI
+        if: ${{ always() }}
+        run: npx nx-cloud fix-ci
 
       # - name: Revoke and delete GPG key
       #   # It's important that we always run this step, otherwise the key will remain active if any of the steps above fail
