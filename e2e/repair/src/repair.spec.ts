@@ -53,10 +53,13 @@ describe("lerna-repair", () => {
       - nx: remove-custom-tasks-runner (Removes the legacy cache configuration from nx.json)
       - nx: release-version-config-changes (Updates release version config based on the breaking changes in Nx v21)
       - nx: release-changelog-config-changes (Updates release changelog config based on the breaking changes in Nx v21)
-      - nx: 21-1-0-add-ignore-entries-for-nx-rule-files (Adds **/nx-rules.mdc and **/nx.instructions.md to .gitignore if not present)
       - nx: 22-0-0-release-version-config-changes (Updates release version config based on the breaking changes in Nx v22)
       - nx: 22-0-0-consolidate-release-tag-config (Consolidates releaseTag* options into nested releaseTag object structure)
       - nx: 22-1-0-update-nx-wrapper (Updates the nx wrapper.)
+      - nx: 22-6-1-add-claude-worktrees-to-git-ignore (Adds .claude/worktrees to .gitignore)
+      - nx: 22-6-0-enable-analytics-prompt (Prompts to enable usage analytics)
+      - nx: 22-6-0-add-claude-settings-local-to-git-ignore (Adds .claude/settings.local.json to .gitignore)
+      - nx: 22-7-0-add-polygraph-to-git-ignore (Adds .nx/polygraph to .gitignore)
       ---------------------------------------------------------
 
       Running migration lerna: remove-unnecessary-use-nx
@@ -220,13 +223,6 @@ describe("lerna-repair", () => {
       No changes were made
 
       ---------------------------------------------------------
-      Running migration nx: 21-1-0-add-ignore-entries-for-nx-rule-files
-      Ran 21-1-0-add-ignore-entries-for-nx-rule-files from nx
-        Adds **/nx-rules.mdc and **/nx.instructions.md to .gitignore if not present
-
-      No changes were made
-
-      ---------------------------------------------------------
       Running migration nx: 22-0-0-release-version-config-changes
       Ran 22-0-0-release-version-config-changes from nx
         Updates release version config based on the breaking changes in Nx v22
@@ -244,6 +240,34 @@ describe("lerna-repair", () => {
       Running migration nx: 22-1-0-update-nx-wrapper
       Ran 22-1-0-update-nx-wrapper from nx
         Updates the nx wrapper.
+
+      No changes were made
+
+      ---------------------------------------------------------
+      Running migration nx: 22-6-1-add-claude-worktrees-to-git-ignore
+      Ran 22-6-1-add-claude-worktrees-to-git-ignore from nx
+        Adds .claude/worktrees to .gitignore
+
+      No changes were made
+
+      ---------------------------------------------------------
+      Running migration nx: 22-6-0-enable-analytics-prompt
+      Ran 22-6-0-enable-analytics-prompt from nx
+        Prompts to enable usage analytics
+
+      No changes were made
+
+      ---------------------------------------------------------
+      Running migration nx: 22-6-0-add-claude-settings-local-to-git-ignore
+      Ran 22-6-0-add-claude-settings-local-to-git-ignore from nx
+        Adds .claude/settings.local.json to .gitignore
+
+      No changes were made
+
+      ---------------------------------------------------------
+      Running migration nx: 22-7-0-add-polygraph-to-git-ignore
+      Ran 22-7-0-add-polygraph-to-git-ignore from nx
+        Adds .nx/polygraph to .gitignore
 
       No changes were made
 
