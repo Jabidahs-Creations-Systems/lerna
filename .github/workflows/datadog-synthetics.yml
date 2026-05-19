@@ -15,9 +15,9 @@ name: Run Datadog Synthetic tests
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
@@ -52,4 +52,3 @@ jobs:
       - name: Skip Datadog Synthetic tests (missing configuration)
         if: ${{ steps.datadog_config.outputs.configured != 'true' }}
         run: echo "Skipping Datadog Synthetic tests because DD_API_KEY or DD_APP_KEY is not configured."
-
