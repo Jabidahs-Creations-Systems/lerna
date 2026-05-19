@@ -40,8 +40,6 @@ permissions:
 jobs:
   Analysis:
     runs-on: ubuntu-latest
-    env:
-      HAS_SONAR_CONFIG: ${{ secrets.SONAR_TOKEN != '' && secrets.SONAR_HOST_URL != '' && (vars.SONAR_PROJECT_KEY != '' || secrets.SONAR_PROJECT_KEY != '') }}
 
     steps:
       - name: Checkout code
@@ -49,8 +47,22 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Detect SonarQube configuration
+        id: sonar_config
+        shell: bash
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY || secrets.SONAR_PROJECT_KEY }}
+        run: |
+          if [[ -n "$SONAR_TOKEN" && -n "$SONAR_HOST_URL" && -n "$SONAR_PROJECT_KEY" ]]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Analyze with SonarQube
-        if: ${{ env.HAS_SONAR_CONFIG == 'true' }}
+        if: ${{ steps.sonar_config.outputs.configured == 'true' }}
 
         # You can pin the exact commit or the version.
         # uses: SonarSource/sonarqube-scan-action@v1.1.0
@@ -75,5 +87,5 @@ jobs:
             #-Dsonar.verbose= # optional, default is false
 
       - name: Skip SonarQube analysis (missing configuration)
-        if: ${{ env.HAS_SONAR_CONFIG != 'true' }}
+        if: ${{ steps.sonar_config.outputs.configured != 'true' }}
         run: echo "Skipping SonarQube analysis because SONAR_TOKEN, SONAR_HOST_URL, or SONAR_PROJECT_KEY is not configured."
